@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= mode === 'add' ? 'Add Task' : 'Edit Task' %>
+  </title>
+  <!-- Include the Bootstrap CSS link -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* Add custom CSS styles */
+    body {
+      background-color: #f8f9fa; /* Light gray background */
+      color: #343a40; /* Dark text color */
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    .bg-primary {
+      background-color: #007bff; /* Adjust the blue color to your preference */
+    }
+
+    .text-primary {
+      color: #fff; /* White text color for primary elements */
+    }
+
+    .btn-primary {
+      background-color: #007bff; /* Adjust the blue color for buttons */
+      border-color: #007bff; /* Adjust the border color for buttons */
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3; /* Adjust the hover color for buttons */
+      border-color: #0056b3; /* Adjust the hover border color for buttons */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="w-50 mx-auto bg-light shadow-lg rounded-lg p-4">
+      <h1 class="display-4">
+        <%= mode === 'add' ? 'Add Task' : 'Edit Task' %>
+      </h1>
+      <form method="POST" action="<%= mode === 'add' ? '/tasks' : '/tasks/' + task.id + '?_method=PUT' %>"
+        class="mt-4">
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" value="<%= task.title %>" required
+            class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" required rows="6"
+            class="form-control"><%= task.description %></textarea>
+        </div>
+        <button type="submit"
+          class="btn btn-primary btn-lg">
+          <%= mode === 'add' ? 'Add' : 'Update' %> Task
+        </button>
+      </form>
+      <a href="/"
+        class="mt-4 text-">
+        Back to Task List
+      </a>
+    </div>
+  </div>
+</body>
+
+</html>

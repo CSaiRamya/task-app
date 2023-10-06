@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Task List</title>
+  <!-- Include the Bootstrap CSS link -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Custom CSS styles */
+    .task-title {
+      font-size: 1.25rem; /* Adjust the font size as needed */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .task-description {
+      font-size: 1rem; /* Adjust the font size as needed */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 800px; /* Adjust the maximum width as needed */
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body class="bg-light text-dark p-4">
+  <div class="container">
+    <h1 class="display-4 mb-4">Task List</h1>
+    <a href="/add" class="btn btn-success mb-4">
+      Add Task
+    </a>
+    <ul class="list-group">
+      <% tasks.forEach(task => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <h2 class="h5 font-weight-bold task-title"><%= task.title %></h2>
+          <p class="text-muted task-description"><%= task.description %></p>
+        </div>
+        <div class="btn-group">
+          <a href="/tasks/<%= task.id %>" class="btn btn-primary">View Details</a>
+          <a href="/tasks/edit/<%= task.id %>" class="btn btn-warning">Update</a>
+          <form method="POST" action="/tasks/<%= task.id %>?_method=DELETE"
+            onsubmit="return confirm('Are you sure you want to delete this task?')">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </li>
+      <% }); %>
+    </ul>
+  </div>
+</body>
+
+</html>
